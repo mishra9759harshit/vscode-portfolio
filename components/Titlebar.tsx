@@ -84,7 +84,7 @@ const Titlebar = () => {
 
                 <div className={styles.guideSection}>
                   <h3> Tab Bar</h3>
-                  <p>The top tab bar shows open "files" representing different pages:</p>
+                  <p>The top tab bar shows open &quot;files&quot; representing different pages:</p>
                   <ul>
                     <li><strong>home.tsx</strong> - Home page with introduction</li>
                     <li><strong>about.html</strong> - About page with profile details</li>
