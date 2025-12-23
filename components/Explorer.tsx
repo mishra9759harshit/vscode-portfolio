@@ -24,7 +24,7 @@ const explorerItems = [
   {
     name: 'projects.js',
     path: '/projects',
-    icon: '/logos/js_icon.svg',
+    icon: '/logos/cplusplus-svgrepo-com.svg',
   },
   {
     name: 'articles.json',
@@ -35,6 +35,21 @@ const explorerItems = [
     name: 'github.md',
     path: '/github',
     icon: '/logos/markdown_icon.svg',
+  },
+  {
+    name: 'achievements.tsx',
+    path: '/achievements',
+    icon: '/logos/typescript-official-svgrepo-com.svg',
+  },
+  {
+    name: 'skills.tsx',
+    path: '/skills',
+    icon: '/logos/docker-svgrepo-com.svg',
+  },
+  {
+    name: 'education.tsx',
+    path: '/education',
+    icon: '/logos/react_icon.svg',
   },
 ];
 

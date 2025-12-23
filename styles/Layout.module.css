@@ -7,7 +7,7 @@
 }
 
 .content {
-  padding: 2rem;
+  padding: 0;
   color: var(--text-color);
   font-family: 'JetBrains Mono', monospace;
   flex: 1;
@@ -15,8 +15,7 @@
   overflow-y: auto;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  display: flex;
-  align-items: center;
+  display: block;
 }
 
 .content {

@@ -90,6 +90,14 @@ export default function HomePage() {
         </div>
 
         <div className={styles.infoSection}>
+          <div className={styles.profileImageContainer}>
+            <img
+              src="/profile/profile-img.jpg"
+              alt="Harshit Mishra"
+              className={styles.profileImageMain}
+            />
+          </div>
+
           <h1 className={styles.developerName}>
             Harshit <span className={styles.accentText}>Mishra</span>
           </h1>

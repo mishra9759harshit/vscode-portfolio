@@ -1,28 +1,33 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
-  VscAccount,
-  VscSettings,
-  VscMail,
-  VscGithubAlt,
-  VscCode,
-  VscFiles,
-  VscEdit,
-} from 'react-icons/vsc';
+  Home,
+  Github,
+  Code,
+  BookOpen,
+  Award,
+  Zap,
+  GraduationCap,
+  Mail,
+  Settings,
+} from 'lucide-react';
 
 import styles from '@/styles/Sidebar.module.css';
 
 const sidebarTopItems = [
-  { Icon: VscFiles, path: '/' },
-  { Icon: VscGithubAlt, path: '/github' },
-  { Icon: VscCode, path: '/projects' },
-  { Icon: VscEdit, path: '/articles' },
-  { Icon: VscMail, path: '/contact' },
+  { Icon: Home, path: '/', label: 'Home' },
+  { Icon: Github, path: '/github', label: 'GitHub' },
+  { Icon: Code, path: '/projects', label: 'Projects' },
+  { Icon: BookOpen, path: '/articles', label: 'Articles' },
+  { Icon: Award, path: '/achievements', label: 'Achievements' },
+  { Icon: Zap, path: '/skills', label: 'Skills' },
+  { Icon: GraduationCap, path: '/education', label: 'Education' },
+  { Icon: Mail, path: '/contact', label: 'Contact' },
 ];
 
 const sidebarBottomItems = [
-  { Icon: VscAccount, path: '/about' },
-  { Icon: VscSettings, path: '/settings' },
+  { path: '/about', isProfileImage: true },
+  { Icon: Settings, path: '/settings' },
 ];
 
 const Sidebar = () => {
@@ -39,8 +44,8 @@ const Sidebar = () => {
               }`}
             >
               <Icon
-                size={16}
-                fill={
+                size={20}
+                color={
                   router.pathname === path
                     ? 'rgb(225, 228, 232)'
                     : 'rgb(106, 115, 125)'
@@ -52,20 +57,36 @@ const Sidebar = () => {
         ))}
       </div>
       <div className={styles.sidebarBottom}>
-        {sidebarBottomItems.map(({ Icon, path }) => (
-          <div className={styles.iconContainer} key={path}>
-            <Link href={path}>
-              <Icon
-                fill={
-                  router.pathname === path
-                    ? 'rgb(225, 228, 232)'
-                    : 'rgb(106, 115, 125)'
-                }
-                className={styles.icon}
-              />
-            </Link>
-          </div>
-        ))}
+        {sidebarBottomItems.map((item) => {
+          const IconComponent = item.Icon;
+          return (
+            <div className={styles.iconContainer} key={item.path}>
+              <Link href={item.path}>
+                {item.isProfileImage ? (
+                  <img
+                    src="/profile/profile-img.jpg"
+                    alt="Profile"
+                    className={`${styles.profileImage} ${
+                      router.pathname === item.path ? styles.activeProfile : ''
+                    }`}
+                  />
+                ) : (
+                  IconComponent && (
+                    <IconComponent
+                      size={20}
+                      color={
+                        router.pathname === item.path
+                          ? 'rgb(225, 228, 232)'
+                          : 'rgb(106, 115, 125)'
+                      }
+                      className={styles.icon}
+                    />
+                  )
+                )}
+              </Link>
+            </div>
+          );
+        })}
       </div>
     </aside>
   );
