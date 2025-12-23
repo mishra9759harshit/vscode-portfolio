@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import styles from '@/styles/AchievementsPage.module.css';
@@ -224,10 +225,12 @@ export default function AchievementsPage() {
           >
             {achievement.image && (
               <div className={styles.imageContainer}>
-                <img
+                <Image
                   src={achievement.image}
                   alt={achievement.title}
                   className={styles.image}
+                  width={200}
+                  height={200}
                 />
               </div>
             )}

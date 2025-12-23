@@ -70,12 +70,14 @@ const Sidebar = () => {
               <div className={styles.iconContainer}>
                 {item.isProfileImage ? (
                   <Link href="/about">
-                    <img
+                    <Image
                       src="/profile/profile.jpg"
                       alt="Profile"
                       className={`${styles.profileImage} ${
                         router.pathname === '/about' ? styles.activeProfile : ''
                       }`}
+                      width={48}
+                      height={48}
                     />
                   </Link>
                 ) : (

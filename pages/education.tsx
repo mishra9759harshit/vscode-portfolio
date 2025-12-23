@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import styles from '@/styles/EducationPage.module.css';
 
@@ -141,10 +142,12 @@ export default function EducationPage() {
             >
               {item.logo && (
                 <div className={styles.logoContainer}>
-                  <img
+                  <Image
                     src={item.logo}
                     alt={item.institution}
                     className={styles.logo}
+                    width={50}
+                    height={50}
                   />
                 </div>
               )}

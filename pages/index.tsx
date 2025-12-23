@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { VscArrowRight } from 'react-icons/vsc';
 
 import styles from '@/styles/HomePage.module.css';
@@ -91,10 +92,12 @@ export default function HomePage() {
 
         <div className={styles.infoSection}>
           <div className={styles.profileImageContainer}>
-            <img
+            <Image
               src="/profile/profile-img.jpg"
               alt="Harshit Mishra"
               className={styles.profileImageMain}
+              width={300}
+              height={300}
             />
           </div>
 

@@ -44,7 +44,7 @@ const Tooltip = ({
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.2 }}
           >
-            {icon && <img src={icon} alt="" className={styles.tooltipIcon} />}
+            {icon && <img src={icon} alt="" className={styles.tooltipIcon} suppressHydrationWarning />}
             <div className={styles.tooltipContent}>
               <h4 className={styles.tooltipTitle}>{title}</h4>
               <p className={styles.tooltipDescription}>{description}</p>
