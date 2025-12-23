@@ -209,63 +209,73 @@ export default function AchievementsPage() {
         </button>
       </div>
 
-      <div className={styles.achievementsGrid}>
-        {filteredAchievements.map((achievement, index) => (
-          <motion.div
-            key={achievement.id}
-            className={`${styles.achievementCard} ${styles[achievement.category]}`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.5,
-              delay: index * 0.1,
-            }}
-            whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}
-            viewport={{ once: true }}
-          >
-            {achievement.image && (
-              <div className={styles.imageContainer}>
-                <Image
-                  src={achievement.image}
-                  alt={achievement.title}
-                  className={styles.image}
-                  width={200}
-                  height={200}
-                />
-              </div>
-            )}
-            <div className={styles.content}>
-              <div className={styles.meta}>
-                <span className={styles.category}>{achievement.category}</span>
-                <span className={styles.date}>{achievement.date}</span>
-              </div>
-              <h3 className={styles.title}>{achievement.title}</h3>
-              <p className={styles.description}>{achievement.description}</p>
+    <div className={styles.achievementsGrid}>
+      {filteredAchievements.map((achievement, index) => (
+        <motion.div
+        key={achievement.id}
+        className={`${styles.achievementCard} ${styles[achievement.category]}`}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.5,
+          delay: index * 0.1,
+        }}
+        whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}
+        viewport={{ once: true }}
+        >
+        {achievement.image && (
+          <div className={styles.imageContainer}>
+            <Image
+            src={achievement.image}
+            alt={achievement.title}
+            className={styles.image}
+            width={200}
+            height={200}
+            />
+          </div>
+        )}
+        <div className={styles.content}>
+          <div className={styles.meta}>
+            <span className={styles.category}>{achievement.category}</span>
+            <span className={styles.date}>{achievement.date}</span>
+          </div>
+          <h3 className={styles.title}>{achievement.title}</h3>
+          <p className={styles.description}>{achievement.description}</p>
 
-              {achievement.downloadUrl && (
-                <a
-                  href={achievement.downloadUrl}
-                  className={styles.downloadBtn}
-                  download
-                >
-                  📥 Download Certificate
-                </a>
-              )}
+          {achievement.downloadUrl && (
+            <a
+            href={achievement.downloadUrl}
+            className={styles.downloadBtn}
+            download
+            >
+            <svg className={styles.icon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Certificate
+            </a>
+          )}
 
-              {achievement.articleUrl && (
-                <a
-                  href={achievement.articleUrl}
-                  className={styles.downloadBtn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  📰 Read News Article
-                </a>
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+          {achievement.articleUrl && (
+            <a
+            href={achievement.articleUrl}
+            className={styles.downloadBtn}
+            target="_blank"
+            rel="noopener noreferrer"
+            >
+            <svg className={styles.icon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+            Read News Article
+            </a>
+          )}
+        </div>
+        </motion.div>
+      ))}
+    </div>
 
       {filteredAchievements.length === 0 && (
         <div className={styles.emptyState}>
