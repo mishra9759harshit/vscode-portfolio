@@ -1,10 +1,10 @@
 import Head from 'next/head';
 
 interface CustomHeadProps {
-  title: string;
+  title?: string;
 }
 
-const CustomHead = ({ title }: CustomHeadProps) => {
+const CustomHead = ({ title = 'Harshit Mishra' }: CustomHeadProps) => {
   return (
     <Head>
       <title>{title}</title>
@@ -21,7 +21,7 @@ const CustomHead = ({ title }: CustomHeadProps) => {
         property="og:description"
         content="A full-stack developer building websites that you'd like to use."
       />
-      <meta property="og:image" content="https://imgur.com/4zi5KkQ.png" />
+      <meta property="og:image" content="https://whoisharshit.vercel.app/profile.jpg" />
       <meta property="og:url" content="https://whoisharshit.vercel.app" />
       <meta name="twitter:card" content="summary_large_image" />
     </Head>
@@ -29,7 +29,3 @@ const CustomHead = ({ title }: CustomHeadProps) => {
 };
 
 export default CustomHead;
-
-CustomHead.defaultProps = {
-  title: 'Nitin Ranganath',
-};

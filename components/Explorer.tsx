@@ -4,52 +4,62 @@ import { useState } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 
 import styles from '@/styles/Explorer.module.css';
+import Tooltip from './Tooltip';
 
 const explorerItems = [
   {
     name: 'home.tsx',
     path: '/',
     icon: '/logos/react_icon.svg',
+    description: 'Home page with introduction',
   },
   {
     name: 'about.html',
     path: '/about',
     icon: '/logos/html_icon.svg',
+    description: 'Profile information and background',
   },
   {
     name: 'contact.css',
     path: '/contact',
     icon: '/logos/css_icon.svg',
+    description: 'Contact form and information',
   },
   {
     name: 'projects.js',
     path: '/projects',
-    icon: '/logos/cplusplus-svgrepo-com.svg',
+    icon: '/logos/postgresql-logo.svg',
+    description: 'Featured work and recent projects',
   },
   {
     name: 'articles.json',
     path: '/articles',
     icon: '/logos/json_icon.svg',
+    description: 'Technical blog posts and articles',
   },
   {
     name: 'github.md',
     path: '/github',
     icon: '/logos/markdown_icon.svg',
+    description: 'Repository statistics and contributions',
   },
   {
     name: 'achievements.tsx',
     path: '/achievements',
     icon: '/logos/typescript-official-svgrepo-com.svg',
+    description: 'Certificates and awards',
   },
   {
     name: 'skills.tsx',
     path: '/skills',
     icon: '/logos/docker-svgrepo-com.svg',
+    description: 'Technical expertise and tools',
   },
   {
     name: 'education.tsx',
     path: '/education',
     icon: '/logos/react_icon.svg',
+    description: 'Academic background and courses',
   },
 ];
 
@@ -66,6 +76,7 @@ const Explorer = () => {
           id="portfolio-checkbox"
           checked={portfolioOpen}
           onChange={() => setPortfolioOpen(!portfolioOpen)}
+          suppressHydrationWarning
         />
         <label htmlFor="portfolio-checkbox" className={styles.heading}>
           <VscChevronRight
@@ -77,13 +88,16 @@ const Explorer = () => {
         <div
           className={styles.files}
           style={portfolioOpen ? { display: 'block' } : { display: 'none' }}
+          suppressHydrationWarning
         >
           {explorerItems.map((item) => (
             <Link href={item.path} key={item.name}>
-              <div className={styles.file}>
-                <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}
-                <p>{item.name}</p>
-              </div>
+              <Tooltip title={item.name} description={item.description} position="right">
+                <div className={styles.file}>
+                  <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}
+                  <p>{item.name}</p>
+                </div>
+              </Tooltip>
             </Link>
           ))}
         </div>

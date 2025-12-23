@@ -34,20 +34,32 @@ const ArticlesPage = ({ articles }: ArticlesPageProps) => {
 };
 
 export async function getStaticProps() {
-  const res = await fetch(
-    'https://dev.to/api/articles?username=harshitcodes',
-    {
-      headers: {
-        'api-key': process.env.DEV_TO_API_KEY!,
-      },
-    }
-  );
+  let articles = [];
 
-  const data = await res.json();
+  try {
+    const res = await fetch(
+      'https://dev.to/api/articles?username=harshitcodes',
+      {
+        headers: process.env.DEV_TO_API_KEY
+          ? {
+              'api-key': process.env.DEV_TO_API_KEY,
+            }
+          : {},
+      }
+    );
+
+    if (res.ok) {
+      articles = await res.json();
+    }
+  } catch (error) {
+    console.log('Failed to fetch articles from Dev.to API:', error);
+    // Return empty articles array if fetch fails
+    articles = [];
+  }
 
   return {
-    props: { title: 'Articles', articles: data },
-    revalidate: 60,
+    props: { title: 'Articles', articles },
+    revalidate: 3600, // Revalidate every hour
   };
 }
 

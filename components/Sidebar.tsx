@@ -1,33 +1,37 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import {
-  Home,
-  Github,
-  Code,
-  BookOpen,
-  Award,
-  Zap,
-  GraduationCap,
-  Mail,
-  Settings,
-} from 'lucide-react';
+  VscSettings,
+  VscMail,
+  VscGithubAlt,
+  VscCode,
+  VscFiles,
+  VscEdit,
+  VscBook,
+  VscSymbolMethod,
+  VscLibrary,
+  VscTerminal,
+} from 'react-icons/vsc';
+import { SiDocker, SiArduino } from 'react-icons/si';
 
 import styles from '@/styles/Sidebar.module.css';
+import Tooltip from './Tooltip';
 
 const sidebarTopItems = [
-  { Icon: Home, path: '/', label: 'Home' },
-  { Icon: Github, path: '/github', label: 'GitHub' },
-  { Icon: Code, path: '/projects', label: 'Projects' },
-  { Icon: BookOpen, path: '/articles', label: 'Articles' },
-  { Icon: Award, path: '/achievements', label: 'Achievements' },
-  { Icon: Zap, path: '/skills', label: 'Skills' },
-  { Icon: GraduationCap, path: '/education', label: 'Education' },
-  { Icon: Mail, path: '/contact', label: 'Contact' },
+  { Icon: VscFiles, path: '/', label: 'Home', description: 'Welcome to my portfolio. View introduction and quick links.' },
+  { Icon: VscGithubAlt, path: '/github', label: 'GitHub', description: 'Browse my GitHub repositories and programming statistics.' },
+  { Icon: VscCode, path: '/projects', label: 'Projects', description: 'Explore my featured projects and recent work.' },
+  { Icon: VscEdit, path: '/articles', label: 'Articles', description: 'Read my technical blog posts and articles.' },
+  { Icon: VscBook, path: '/achievements', label: 'Achievements', description: 'View my achievements, awards, and certificates.' },
+  { Icon: VscSymbolMethod, path: '/skills', label: 'Skills', description: 'See my technical skills and expertise.' },
+  { Icon: VscLibrary, path: '/education', label: 'Education', description: 'View my educational background and qualifications.' },
+  { Icon: VscMail, path: '/contact', label: 'Contact', description: 'Get in touch with me. Contact form and information.' },
 ];
 
 const sidebarBottomItems = [
-  { path: '/about', isProfileImage: true },
-  { Icon: Settings, path: '/settings' },
+  { path: '/about', isProfileImage: true, label: 'Profile', description: 'View my profile and about me.' },
+  { Icon: VscSettings, path: '/settings', label: 'Settings', description: 'Customize portfolio appearance and preferences.' },
 ];
 
 const Sidebar = () => {
@@ -36,55 +40,60 @@ const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarTop}>
-        {sidebarTopItems.map(({ Icon, path }) => (
-          <Link href={path} key={path}>
-            <div
-              className={`${styles.iconContainer} ${
-                router.pathname === path && styles.active
-              }`}
-            >
-              <Icon
-                size={20}
-                color={
-                  router.pathname === path
-                    ? 'rgb(225, 228, 232)'
-                    : 'rgb(106, 115, 125)'
-                }
-                className={styles.icon}
-              />
-            </div>
-          </Link>
+        {sidebarTopItems.map(({ Icon, path, label, description }) => (
+          <Tooltip key={path} title={label} description={description} position="right">
+            <Link href={path}>
+              <div
+                className={`${styles.iconContainer} ${
+                  router.pathname === path && styles.active
+                }`}
+              >
+                <Icon
+                  size={16}
+                  fill={
+                    router.pathname === path
+                      ? 'rgb(225, 228, 232)'
+                      : 'rgb(106, 115, 125)'
+                  }
+                  className={styles.icon}
+                />
+              </div>
+            </Link>
+          </Tooltip>
         ))}
       </div>
       <div className={styles.sidebarBottom}>
         {sidebarBottomItems.map((item) => {
           const IconComponent = item.Icon;
           return (
-            <div className={styles.iconContainer} key={item.path}>
-              <Link href={item.path}>
+            <Tooltip key={item.path} title={item.label} description={item.description} position="right">
+              <div className={styles.iconContainer}>
                 {item.isProfileImage ? (
-                  <img
-                    src="/profile/profile-img.jpg"
-                    alt="Profile"
-                    className={`${styles.profileImage} ${
-                      router.pathname === item.path ? styles.activeProfile : ''
-                    }`}
-                  />
-                ) : (
-                  IconComponent && (
-                    <IconComponent
-                      size={20}
-                      color={
-                        router.pathname === item.path
-                          ? 'rgb(225, 228, 232)'
-                          : 'rgb(106, 115, 125)'
-                      }
-                      className={styles.icon}
+                  <Link href="/about">
+                    <img
+                      src="/profile/profile.jpg"
+                      alt="Profile"
+                      className={`${styles.profileImage} ${
+                        router.pathname === '/about' ? styles.activeProfile : ''
+                      }`}
                     />
-                  )
+                  </Link>
+                ) : (
+                  <Link href={item.path}>
+                    {IconComponent && (
+                      <IconComponent
+                        fill={
+                          router.pathname === item.path
+                            ? 'rgb(225, 228, 232)'
+                            : 'rgb(106, 115, 125)'
+                        }
+                        className={styles.icon}
+                      />
+                    )}
+                  </Link>
                 )}
-              </Link>
-            </div>
+              </div>
+            </Tooltip>
           );
         })}
       </div>

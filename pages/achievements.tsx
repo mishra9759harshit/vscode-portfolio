@@ -28,43 +28,43 @@ export default function AchievementsPage() {
         'National Grand Finalist in Smart India Hackathon 2025. Developed an innovative solution addressing real-world problems.',
       category: 'event',
       date: '2025',
-      image: '/event/sih-2025.jpg',
+      image: '/event/evaluation.jpg',
     },
     {
-      id: 'tech-summit-2024',
-      title: 'Tech Summit 2024',
+      id: 'Photoshot with HOD & Director-2025',
+      title: 'Photoshot with Director & HOD 2025',
       description:
-        'Participated in annual tech summit showcasing innovative projects and networking with industry professionals.',
+        'Photo shot with the Director and Head of Department during the Smart India Hackathon 2025 event.',
       category: 'event',
-      date: '2024',
-      image: '/event/tech-summit.jpg',
+      date: '2025',
+      image: '/event/img-with-director.jpg',
     },
     {
-      id: 'hackathon-nationals-2024',
-      title: 'National Hackathon Championships 2024',
+      id: 'Taking feedback from judges-2025',
+      title: 'Taking feedback from judges 2025',
       description:
         'Competed in national level hackathon with advanced web technologies. Team ranked in top 10.',
       category: 'event',
-      date: '2024',
-      image: '/event/hackathon-nationals.jpg',
+      date: '2025',
+      image: '/event/judges.jpg',
     },
     {
-      id: 'web-dev-expo-2024',
-      title: 'Web Development Expo 2024',
+      id: 'I2IT Pune-2025',
+      title: 'I2IT Pune 2025',
       description:
-        'Showcased full-stack web development projects and demonstrated modern development practices.',
-      category: 'event',
-      date: '2024',
-      image: '/event/webdev-expo.jpg',
-    },
-    {
-      id: 'ai-summit-2025',
-      title: 'AI & Machine Learning Summit 2025',
-      description:
-        'Explored cutting-edge AI technologies and participated in hands-on ML workshops.',
+        'Attended the I2IT Pune event where I get a chance to meet many Respected CEOs, Directors, government officials from Higher Education and Defence Ministry.',
       category: 'event',
       date: '2025',
-      image: '/event/ai-summit.jpg',
+      image: '/event/Team_Nova_Minds.jpg',
+    },
+    {
+      id: 'taking workshop At Bareilly College, Bareilly -2025',
+      title: 'GitHub and Professional LinkedIn Profile Summit 2025',
+      description:
+        'I Get chance to Introduce Linkedin and GitHub to my Juniours.',
+      category: 'event',
+      date: '2025',
+      image: '/event/clg1.jpg',
     },
 
     // Certificates
@@ -75,68 +75,59 @@ export default function AchievementsPage() {
         'Official certificate of participation and recognition as a Grand Finalist in SIH 2025.',
       category: 'certificate',
       date: '2025',
-      image: '/certificates/sih-cert.jpg',
-      downloadUrl: '/certificates/sih-certificate.pdf',
+      image: '/certificates/sih_cert.jpg',
+      downloadUrl: '/certificates/SIH_Certificate_Harshit_Mishra.pdf',
     },
     {
-      id: 'mern-certificate',
-      title: 'MERN Stack Developer Certification',
+      id: 'IBM Cybersecurity Cert',
+      title: 'IBM Cybersecurity Certificate',
       description:
-        'Completed comprehensive MERN stack development course covering MongoDB, Express, React, and Node.js.',
+        'Certification in Cybersecurity Fundamentals from IBM, covering key concepts and practices in the field.',
       category: 'certificate',
       date: '2024',
-      image: '/certificates/mern-cert.jpg',
-      downloadUrl: '/certificates/mern-certificate.pdf',
+      image: '/certificates/IBM.jpg',
+      downloadUrl: '/certificates/IBM.jpg',
     },
     {
-      id: 'web-design-cert',
-      title: 'Advanced Web Design & Development',
+      id: 'Cybersecurity Job Simulation',
+      title: 'Cybersecurity Job Simulation from Mastercard',
       description:
-        'Professional certification in responsive web design, CSS frameworks, and modern web standards.',
+        'Cybersecurity Job Simulation certification from Mastercard, focusing on real-world security scenarios and solutions.',
       category: 'certificate',
       date: '2024',
-      image: '/certificates/webdesign-cert.jpg',
-      downloadUrl: '/certificates/webdesign-certificate.pdf',
+      image: '/certificates/Visa.jpg',
+      downloadUrl: '/certificates/Visa.jpg',
     },
-    {
-      id: 'linux-cert',
-      title: 'Linux System Administration',
-      description:
-        'Certification in Linux system administration, security, and command-line proficiency.',
-      category: 'certificate',
-      date: '2024',
-      image: '/certificates/linux-cert.jpg',
-      downloadUrl: '/certificates/linux-certificate.pdf',
-    },
-    {
-      id: 'cybersec-cert',
-      title: 'Cybersecurity & Ethical Hacking Basics',
-      description:
-        'Introduction to cybersecurity concepts, penetration testing basics, and security best practices.',
-      category: 'certificate',
-      date: '2024',
-      image: '/certificates/cybersec-cert.jpg',
-      downloadUrl: '/certificates/cybersecurity-certificate.pdf',
-    },
+    
+    // {
+    //   id: 'cybersec-cert',
+    //   title: 'Cybersecurity & Ethical Hacking Basics',
+    //   description:
+    //     'Introduction to cybersecurity concepts, penetration testing basics, and security best practices.',
+    //   category: 'certificate',
+    //   date: '2024',
+    //   image: '/certificates/cybersec-cert.jpg',
+    //   downloadUrl: '/certificates/cybersecurity-certificate.pdf',
+    // },
 
     // Awards
     {
-      id: 'innovation-award-2025',
-      title: 'Innovation Award 2025',
+      id: 'SIH Participation Award -2025',
+      title: 'SIH Participation Award 2025',
       description:
-        'Recognized for exceptional innovation in full-stack web development and creative problem-solving.',
+        'It is My Honor to receive this certificate of participation in Smart India Hackathon 2025. From Priciple Of I2IT Pune, Vice Precident At Winjit technologies, AICTE Nodal Officer. with signatures of Pricniple of I2IT, SH. Veenit Joshi (Secetary Department of Higher Education, Ministry Of Education, Govt of India), Prof. T.G. Sitaram (Director, AICTE, Ministry of Education, Govt of India), and Dr. Abhay Jere (Vice Chairman AICTE, Cheif Innovation Officer).',
       category: 'award',
       date: '2025',
-      image: '/awards/innovation-award.jpg',
+      image: '/awards/certification.jpg',
     },
     {
-      id: 'best-developer-award',
-      title: 'Best Developer Award',
+      id: 'Swags Award -2025',
+      title: 'Swags Award From I2IT Pune -2025',
       description:
-        'Awarded for outstanding coding practices, clean code architecture, and technical excellence.',
+        'Received Swags from I2IT Pune on behalf of Smart India Hackathon 2025 Participation.',
       category: 'award',
-      date: '2024',
-      image: '/awards/best-dev-award.jpg',
+      date: '2025',
+      image: '/awards/Swags_.jpg',
     },
 
     // News Articles
@@ -147,29 +138,29 @@ export default function AchievementsPage() {
         'Featured in national tech news for qualifying as a Grand Finalist in Smart India Hackathon 2025.',
       category: 'news',
       date: '2025',
-      image: '/news/sih-news.jpg',
+      image: '/articals/sih_artical.jpeg',
       articleUrl: 'https://example-tech-news.com/sih-2025',
     },
     {
-      id: 'startup-interview',
-      title: 'Young Developer Spotlight - Tech Industry Profile',
+      id: 'Created e-Learning Platform',
+      title: 'Created e-Learning Platform for Students',
       description:
-        'Interview featuring my journey in full-stack development and contributions to innovative tech projects.',
+        'Coverage of the development and launch of an innovative e-learning platform aimed at enhancing student learning experiences. with Online Attendance System, Real-time Performance Analytics, Interactive Content, and Gamified Learning Modules.',
       category: 'news',
       date: '2024',
-      image: '/news/startup-interview.jpg',
+      image: '/articals/eCampus.jpg',
       articleUrl: 'https://example-startup-news.com/developer-profile',
     },
-    {
-      id: 'tech-contribution',
-      title: 'Open Source Contributions Making Impact',
-      description:
-        'Coverage of significant contributions to open-source web development projects and community involvement.',
-      category: 'news',
-      date: '2024',
-      image: '/news/opensource-coverage.jpg',
-      articleUrl: 'https://example-dev-news.com/opensource-contributions',
-    },
+    // {
+    //   id: 'tech-contribution',
+    //   title: 'Open Source Contributions Making Impact',
+    //   description:
+    //     'Coverage of significant contributions to open-source web development projects and community involvement.',
+    //   category: 'news',
+    //   date: '2024',
+    //   image: '/news/opensource-coverage.jpg',
+    //   articleUrl: 'https://example-dev-news.com/opensource-contributions',
+    // },
   ];
 
   const filteredAchievements =

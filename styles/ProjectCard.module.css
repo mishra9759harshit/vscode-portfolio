@@ -8,13 +8,20 @@
   position: relative;
   height: 250px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.25s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
 }
 
+.card.featured {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px rgba(249, 130, 108, 0.2);
+}
+
 .card:hover {
   border-color: var(--accent-color);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
 }
 
 .background {
@@ -39,6 +46,22 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, var(--accent-color), #ff9a56);
+  color: white;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .logoWrapper {
@@ -97,15 +120,24 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  margin: 0.5rem 0 1rem;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0.5rem;
 }
 
-.tags span {
-  margin: 0.5rem 0.5rem 0 0;
-  padding: 0.2rem 0.5rem;
-  border-radius: 20px;
+.tag {
+  background: rgba(249, 130, 108, 0.15);
+  color: var(--accent-color);
+  padding: 0.3rem 0.7rem;
+  border-radius: 16px;
   font-size: 0.75rem;
-  transition: all 0.2s;
+  font-weight: 500;
+  border: 1px solid rgba(249, 130, 108, 0.3);
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: rgba(249, 130, 108, 0.25);
+  border-color: var(--accent-color);
 }
 
 .cta {

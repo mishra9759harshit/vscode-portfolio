@@ -41,12 +41,11 @@ import {
   FaVideo,
   FaPodcast,
   FaPenNib,
-  FaUserTie,
   FaPuzzlePiece,
   FaComments,
   FaLeaf,
   FaDatabase,
-  FaChalkboardUser,
+  FaChalkboard,
 } from 'react-icons/fa';
 import type { IconType } from 'react-icons';
 
@@ -84,39 +83,61 @@ export default function SkillsPage() {
     return colors[language] || '#858585';
   };
 
-  const fetchGithubLanguages = useCallback(async () => {
+const fetchGithubLanguages = useCallback(async () => {
     try {
-      const response = await fetch('https://api.github.com/users/mishra9759harshit/repos');
-      const repos = (await response.json()) as Array<{ language: string | null; size: number }>;
-
-      const languageStats: { [key: string]: number } = {};
-      let totalSize = 0;
-
-      repos.forEach((repo) => {
-        if (repo.language) {
-          languageStats[repo.language] = (languageStats[repo.language] || 0) + repo.size;
-          totalSize += repo.size;
+        const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+        const headers: Record<string, string> = {};
+        
+        // Add authorization header if token is available for private repos access
+        if (token) {
+            headers.Authorization = `token ${token}`;
         }
-      });
 
-      const languages = Object.entries(languageStats)
-        .map(([name, size]) => ({
-          name,
-          percentage: Math.round(((size as number) / totalSize) * 100),
-          color: getLanguageColor(name),
-        }))
-        .sort((a, b) => b.percentage - a.percentage)
-        .slice(0, 6);
+        // Fetch all repos (public + private if authenticated)
+        const response = await fetch(
+            'https://api.github.com/users/mishra9759harshit/repos?per_page=100',
+            { headers }
+        );
+        
+        if (!response.ok) {
+            throw new Error(`GitHub API error: ${response.status}`);
+        }
 
-      setGithubLanguages(languages);
-    } catch {
-      console.log('GitHub API fetch note: Update with your username');
+        const repos = (await response.json()) as Array<{ language: string | null; size: number }>;
+
+        const languageStats: { [key: string]: number } = {};
+        let totalSize = 0;
+
+        repos.forEach((repo) => {
+            if (repo.language) {
+                languageStats[repo.language] = (languageStats[repo.language] || 0) + repo.size;
+                totalSize += repo.size;
+            }
+        });
+
+        if (totalSize === 0) {
+            console.log('No language data found');
+            return;
+        }
+
+        const languages = Object.entries(languageStats)
+            .map(([name, size]) => ({
+                name,
+                percentage: Math.round(((size as number) / totalSize) * 100),
+                color: getLanguageColor(name),
+            }))
+            .sort((a, b) => b.percentage - a.percentage);
+
+        setGithubLanguages(languages);
+    } catch (error) {
+        console.log('GitHub API fetch note:', error instanceof Error ? error.message : 'Failed to fetch GitHub data');
+        console.log('To include private repos, add NEXT_PUBLIC_GITHUB_TOKEN to .env.local');
     }
-  }, []);
+}, []);
 
-  useEffect(() => {
+useEffect(() => {
     fetchGithubLanguages();
-  }, [fetchGithubLanguages]);
+}, [fetchGithubLanguages]);
 
   const skillCategories: SkillCategory[] = [
     {
@@ -167,7 +188,7 @@ export default function SkillsPage() {
       description: 'Various Linux distributions and OS administration',
       skills: [
         { name: 'Linux (General)', iconComponent: SiLinux, level: 'advanced', category: 'OS' },
-        { name: 'Kali Linux', iconComponent: SiKali, level: 'advanced', category: 'OS' },
+        { name: 'Kali Linux', iconComponent: FaShieldAlt, level: 'advanced', category: 'OS' },
         { name: 'Parrot OS', iconComponent: SiParrotsecurity, level: 'advanced', category: 'OS' },
         { name: 'Arch Linux', iconComponent: SiArchlinux, level: 'intermediate', category: 'OS' },
         { name: 'Fedora OS', iconComponent: SiFedora, level: 'intermediate', category: 'OS' },
@@ -177,7 +198,7 @@ export default function SkillsPage() {
       name: 'Development Environments',
       description: 'Tools and IDEs for development and coding',
       skills: [
-        { name: 'VS Code', iconComponent: SiVisualstudiocode, level: 'expert', category: 'IDE' },
+        { name: 'VS Code', iconComponent: FaTerminal, level: 'expert', category: 'IDE' },
         { name: 'PyCharm', iconComponent: SiPycharm, level: 'advanced', category: 'IDE' },
         { name: 'Geany', iconComponent: FaTerminal, level: 'intermediate', category: 'IDE' },
         { name: 'Jupyter Notebook', iconComponent: SiJupyter, level: 'advanced', category: 'IDE' },
@@ -226,7 +247,7 @@ export default function SkillsPage() {
         { name: 'Narrating', iconComponent: FaMicrochip, level: 'advanced', category: 'Creative' },
         {
           name: 'Teaching',
-          iconComponent: FaChalkboardUser,
+          iconComponent: FaChalkboard,
           level: 'advanced',
           category: 'Soft Skills',
         },

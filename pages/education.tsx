@@ -17,69 +17,69 @@ export default function EducationPage() {
   const education: EducationItem[] = [
     {
       id: 'bachelor-degree',
-      institution: 'Institute of Technology',
-      degree: 'Bachelor of Technology (B.Tech)',
+      institution: 'M.J.P.R.U. Bareilly',
+      degree: 'Bachelor of Computer Applications',
       field: 'Computer Science & Engineering',
-      duration: '2021 - 2025',
+      duration: '2024 - 2026',
       description:
-        'Currently pursuing Bachelor of Technology in Computer Science with focus on web development, data structures, and software engineering.',
+        'Currently pursuing Bachelor of Computer Applications in Computer Science with focus on web development, data structures, and software engineering.',
       achievements: [
-        'CGPA: 8.2/10',
+        'SGPA last semester: 8.2/10',
         'Active member of coding club',
         'Participated in Smart India Hackathon 2025 - Grand Finalist',
-        'Led 5+ web development projects',
+        'Led 15+ web development projects',
         'Completed advanced coursework in DBMS, OS, and Networks',
       ],
-      logo: '/education/btech.jpg',
+      logo: 'https://th.bing.com/th/id/ODF.LtWotuFRbmp0oF3w-zrqxQ?w=32&h=32&qlt=90&pcl=fffffa&o=6&cb=ucfimg1&pid=1.2&ucfimg=1',
     },
     {
       id: 'senior-secondary',
-      institution: 'National Public School',
+      institution: 'UP Board Of Intermedieat Education',
       degree: 'Senior Secondary Education (XII)',
-      field: 'Science with Computer Science',
-      duration: '2019 - 2021',
+      field: 'Science with 1st Honors',
+      duration: '2022 - 2024',
       description:
         'Completed higher secondary education with specialization in Physics, Chemistry, Mathematics, and Computer Science.',
       achievements: [
-        'Percentage: 92%',
-        'School Academic Excellence Award',
-        'Proficient in C++ programming',
-        'Science project recognition',
+        'Percentage: 83.7%',
+        'Physics and Chemistry Topper ',
+        'Keen Intrest in Science and Technology',
+        
       ],
-      logo: '/education/senior-secondary.jpg',
+      logo: 'https://th.bing.com/th/id/ODF.Vj2VMO4XAAVKd_C8R4M9JQ?w=32&h=32&qlt=90&pcl=fffffc&o=6&cb=ucfimg1&pid=1.2&ucfimg=1',
     },
     {
       id: 'secondary',
-      institution: 'National Public School',
+      institution: 'UP Board of intermediate Education',
       degree: 'Secondary Education (X)',
       field: 'General',
-      duration: '2017 - 2019',
+      duration: '2021 - 2022',
       description:
         'Completed secondary education with strong academic performance and active participation in school activities.',
       achievements: [
-        'Percentage: 90%',
+        
         'School Merit Certificate',
         'Science Olympiad Participant',
         'Student Council Member',
       ],
-      logo: '/education/secondary.jpg',
+      logo: 'https://th.bing.com/th/id/ODF.Vj2VMO4XAAVKd_C8R4M9JQ?w=32&h=32&qlt=90&pcl=fffffc&o=6&cb=ucfimg1&pid=1.2&ucfimg=1',
     },
   ];
 
   const courses: EducationItem[] = [
     {
-      id: 'mern-stack',
-      institution: 'Online Learning Platform',
-      degree: 'MERN Stack Development',
-      field: 'Web Development',
+      id: 'Networking-Basics',
+      institution: 'Swayam Platform',
+      degree: 'Networking Basics',
+      field: 'Computer Science',
       duration: '2024',
       description:
-        'Comprehensive course covering MongoDB, Express.js, React.js, and Node.js. Built 10+ full-stack projects.',
+        'Comprehensive course covering fundamentals of computer networking, protocols, and network security.',
       achievements: [
         'Certification completed',
         'Grade: Distinction',
-        'Built e-commerce platform',
-        'REST API development',
+        'Hands-on labs on network setup',
+        'Understanding of TCP/IP, DNS, HTTP',
       ],
     },
     {
@@ -99,7 +99,7 @@ export default function EducationPage() {
     },
     {
       id: 'web-design',
-      institution: 'UX/UI Design Institute',
+      institution: 'Simple Learn',
       degree: 'Advanced Web Design',
       field: 'Frontend Development',
       duration: '2023',
