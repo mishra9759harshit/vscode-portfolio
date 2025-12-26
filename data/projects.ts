@@ -31,7 +31,7 @@ export const projects: Project[] = [
     title: 'YouTube Video Downloader Pro',
     description: 'Robust desktop utility for downloading YouTube videos in multiple formats and resolutions. Supports offline playback, batch processing, and seamless sharing with an intuitive user interface.',
     logo: '/logos/driwwwle.svg',
-    link: 'https://github.com/mishra9759harshit/YouTubeDownloaderPro',
+    link: 'https://ytvideodownloaderpro.vercel.app',
     slug: 'youtube-video-downloader-pro',
     tags: ['Python', 'Desktop App', 'Utility'],
   },
