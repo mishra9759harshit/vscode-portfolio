@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       { hostname: 'media2.dev.to', protocol: 'https' },
       { hostname: 'bcbecampus.vercel.app', protocol: 'https' },
       { hostname: 'bcbcomputerdept.vercel.app', protocol: 'https' },
+      { hostname: 'th.bing.com', protocol: 'https' },
     ],
   },
 };
