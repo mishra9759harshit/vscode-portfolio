@@ -118,6 +118,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let ogImage = '';
     let statusCode = 404;
     const foundImages: string[] = [];
+    let profileExists = false;
 
     for (const target of targets) {
       try {
@@ -131,7 +132,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
             'Pragma': 'no-cache',
             'Expires': '0',
-            'Referer': 'https://www.google.com/',
+            'Referer': platform === 'instagram' ? 'https://www.instagram.com/' : 'https://www.linkedin.com/',
             'Sec-Fetch-Dest': 'document',
             'Sec-Fetch-Mode': 'navigate',
             'Sec-Fetch-Site': 'none',
@@ -156,7 +157,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0, private',
                 'Pragma': 'no-cache',
                 'Expires': '0',
-                'Referer': 'https://www.google.com/',
+                'Referer': platform === 'instagram' ? 'https://www.instagram.com/' : 'https://www.linkedin.com/',
               },
               signal: AbortSignal.timeout(10000),
             });
@@ -165,12 +166,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               const text = await retryR.text();
               statusCode = 200;
               
+              // Check if profile exists (contains profile-related content)
+              if (platform === 'instagram') {
+                const hasProfileContent = 
+                  text.includes('profile_pic_url') ||
+                  text.includes('full_name') ||
+                  text.includes('@' + username) ||
+                  text.includes('biography') ||
+                  text.includes(username) ||
+                  text.includes('sharedData');
+                profileExists = profileExists || hasProfileContent;
+              } else if (platform === 'linkedin') {
+                const hasProfileContent =
+                  text.includes('firstName') ||
+                  text.includes('lastName') ||
+                  text.includes('profilePicture') ||
+                  text.includes('headline') ||
+                  text.includes(username);
+                profileExists = profileExists || hasProfileContent;
+              }
+              
               // Process the text content (same as below)
               const is404Page =
                 text.includes('404') ||
                 text.includes('not found') ||
                 text.includes('page not found') ||
-                (text.length < 5000 && text.includes('error'));
+                (text.length < 5000 && text.includes('error') && !profileExists);
 
               if (!is404Page || ogTitle) {
                 // Try to read Open Graph tags
@@ -196,7 +217,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                   ogTitle = extractLinkedInName(text, ogTitle, username);
                 }
 
-                if (ogTitle || ogImage) {
+                if (ogTitle || ogImage || profileExists) {
                   break;
                 }
               }
@@ -211,12 +232,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (r.ok || r.status === 200) {
           const text = await r.text();
 
+          // Check if profile exists (contains profile-related content)
+          if (platform === 'instagram') {
+            const hasProfileContent = 
+              text.includes('profile_pic_url') ||
+              text.includes('full_name') ||
+              text.includes('@' + username) ||
+              text.includes('biography') ||
+              text.includes(username) ||
+              text.includes('sharedData');
+            profileExists = profileExists || hasProfileContent;
+          } else if (platform === 'linkedin') {
+            const hasProfileContent =
+              text.includes('firstName') ||
+              text.includes('lastName') ||
+              text.includes('profilePicture') ||
+              text.includes('headline') ||
+              text.includes(username);
+            profileExists = profileExists || hasProfileContent;
+          }
+
           // Check if page actually contains profile content (not 404 page)
           const is404Page =
             text.includes('404') ||
             text.includes('not found') ||
             text.includes('page not found') ||
-            (text.length < 5000 && text.includes('error'));
+            (text.length < 5000 && text.includes('error') && !profileExists);
 
           if (is404Page && !ogTitle) {
             continue;
@@ -312,7 +353,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
 
-    // If we got data or the profile likely exists (got a 200 response), return it
+    // If we got data, return it
     if (ogTitle || ogImage) {
       const name = cleanName(ogTitle) || username;
       let avatar = ogImage;
@@ -330,7 +371,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json({ name, avatar });
     }
 
-    // If we found at least one successful response, use fallback
+    // If we found evidence the profile exists (has profile-related content), return minimal data
+    if (profileExists) {
+      return res.status(200).json({ name: username, avatar: '' });
+    }
+
+    // If we got at least one successful response but no data, use fallback
     if (statusCode === 200) {
       return res.status(200).json({ name: username, avatar: '' });
     }

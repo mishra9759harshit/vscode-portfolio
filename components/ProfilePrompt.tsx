@@ -99,7 +99,7 @@ export default function ProfilePrompt({ onComplete }: Props) {
     <div className={styles.backdrop} role="dialog" aria-modal="true" aria-labelledby="prompt-title">
       <form className={styles.modal} onSubmit={submit}>
         <div className={styles.header}>
-          <h2 id="prompt-title">Welcome to My Portfolio!</h2>
+          <h2 id="prompt-title">Happy New Year 2026!</h2>
           <p className={styles.subtitle}>Share your profile to see a special greeting</p>
         </div>
 
