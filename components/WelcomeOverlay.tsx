@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '@/styles/WelcomeOverlay.module.css';
 
 type Props = {
@@ -57,22 +57,71 @@ const POETICAL_QUOTES = [
   },
 ];
 
+// Default fallback images for each platform
+const PLATFORM_FALLBACK_IMAGES = {
+  github: 'https://avatars.githubusercontent.com/u/1?v=4',
+  instagram: 'https://img.freepik.com/free-vector/golden-happy-new-year-background_1262-6471.jpg?semt=ais_hybrid',
+  linkedin: 'https://img.freepik.com/free-vector/golden-happy-new-year-background_1262-6471.jpg?semt=ais_hybrid',
+};
+
 export default function WelcomeOverlay({ profile, onClose }: Props) {
   const year = new Date().getFullYear();
   const quote = POETICAL_QUOTES[Math.floor(Math.random() * POETICAL_QUOTES.length)];
+  
+  const [imageUrl, setImageUrl] = useState(profile.avatar || '');
+  const [imageLoading, setImageLoading] = useState(!!profile.avatar);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    // Reset state when avatar changes
+    if (profile.avatar) {
+      setImageUrl(profile.avatar);
+      setImageLoading(true);
+      setImageError(false);
+    }
+  }, [profile.avatar]);
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+    setImageError(false);
+  };
+
+  const handleImageError = () => {
+    setImageLoading(false);
+    setImageError(true);
+    
+    // Try fallback image for the specific platform
+    const fallbackUrl = PLATFORM_FALLBACK_IMAGES[profile.platform as keyof typeof PLATFORM_FALLBACK_IMAGES];
+    if (fallbackUrl && imageUrl !== fallbackUrl) {
+      setImageUrl(fallbackUrl);
+      setImageLoading(true);
+    } else {
+      // Use generic celebration image if platform-specific fallback fails
+      setImageUrl('https://img.freepik.com/free-vector/golden-happy-new-year-background_1262-6471.jpg?semt=ais_hybrid');
+    }
+  };
+
+  // Determine which image to show
+  const displayImageUrl = imageError 
+    ? PLATFORM_FALLBACK_IMAGES[profile.platform as keyof typeof PLATFORM_FALLBACK_IMAGES] || 'https://img.freepik.com/free-vector/golden-happy-new-year-background_1262-6471.jpg?semt=ais_hybrid'
+    : imageUrl;
 
   return (
     <div className={styles.overlay}>
       <div className={styles.card}>
         <div className={styles.avatarContainer}>
-          <img
-            className={styles.avatar}
-            src={profile.avatar || 'https://img.freepik.com/free-vector/golden-happy-new-year-background_1262-6471.jpg?semt=ais_hybrid'}
-            alt={profile.name}
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = 'https://img.freepik.com/free-vector/golden-happy-new-year-background_1262-6471.jpg?semt=ais_hybrid';
-            }}
-          />
+          <div className={styles.imageWrapper}>
+            {imageLoading && <div className={styles.imageLoader} />}
+            <img
+              className={styles.avatar}
+              src={displayImageUrl}
+              alt={profile.name}
+              loading="eager"
+              decoding="async"
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+            />
+          </div>
           <div className={styles.avatarRing} />
         </div>
 
