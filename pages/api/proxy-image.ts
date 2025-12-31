@@ -119,11 +119,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.setHeader('Content-Length', buffer.length);
     
     res.send(buffer);
-  } catch (error: any) {
-    console.error('Image proxy error:', error?.message || error);
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Image proxy error:', errorMessage);
     
     // Return a more informative error response
-    const errorMessage = error?.message || 'Unknown error';
     if (errorMessage.includes('timeout') || errorMessage.includes('AbortError')) {
       return res.status(504).json({ error: 'Image fetch timeout - server took too long to respond' });
     }

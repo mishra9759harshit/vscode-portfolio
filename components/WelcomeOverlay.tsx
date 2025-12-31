@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import styles from '@/styles/WelcomeOverlay.module.css';
 
 type Props = {
@@ -112,12 +113,13 @@ export default function WelcomeOverlay({ profile, onClose }: Props) {
         <div className={styles.avatarContainer}>
           <div className={styles.imageWrapper}>
             {imageLoading && <div className={styles.imageLoader} />}
-            <img
+            <Image
               className={styles.avatar}
               src={displayImageUrl}
               alt={profile.name}
-              loading="eager"
-              decoding="async"
+              width={140}
+              height={140}
+              priority
               onLoad={handleImageLoad}
               onError={handleImageError}
             />

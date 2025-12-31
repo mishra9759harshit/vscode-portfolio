@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import styles from '@/styles/EducationPage.module.css';
 
 interface EducationItem {

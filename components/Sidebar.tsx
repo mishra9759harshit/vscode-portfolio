@@ -11,9 +11,7 @@ import {
   VscBook,
   VscSymbolMethod,
   VscLibrary,
-  VscTerminal,
 } from 'react-icons/vsc';
-import { SiDocker, SiArduino } from 'react-icons/si';
 
 import styles from '@/styles/Sidebar.module.css';
 import Tooltip from './Tooltip';

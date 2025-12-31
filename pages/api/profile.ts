@@ -55,7 +55,7 @@ function cleanUrl(url: string): string {
   // Decode HTML entities
   try {
     url = decodeURIComponent(url);
-  } catch (e) {
+  } catch {
     // Continue if decode fails
   }
   
@@ -201,7 +201,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
               }
             }
-          } catch (retryErr) {
+          } catch {
             // Continue to next URL if retry fails
             continue;
           }
@@ -336,9 +336,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     return res.status(404).json({ error: `${platform} profile not found or is private` });
-  } catch (err: any) {
+  } catch (err) {
+    const errorMessage = err instanceof Error ? err.message : 'Failed to fetch profile. Please try again.';
     console.error('Profile fetch error:', err);
-    return res.status(500).json({ error: 'Failed to fetch profile. Please try again.' });
+    return res.status(500).json({ error: errorMessage });
   }
 }
 
@@ -361,14 +362,14 @@ function extractInstagramImage(text: string, currentImage: string, foundImages: 
         ogImage = cleanUrl(profilePicUrl);
         foundImages.push(ogImage);
       }
-    } catch (e) {
+    } catch {
       // Continue with other methods
     }
   }
 
   // Original methods 1-6
   if (!ogImage) {
-    let profilePicMatch = text.match(/"profile_pic_url_hd":"([^"]+)"/);
+    const profilePicMatch = text.match(/"profile_pic_url_hd":"([^"]+)"/);
     if (profilePicMatch) {
       const url = cleanUrl(profilePicMatch[1]);
       if (isValidImageUrl(url)) {
@@ -379,7 +380,7 @@ function extractInstagramImage(text: string, currentImage: string, foundImages: 
   }
 
   if (!ogImage) {
-    let profilePicMatch = text.match(/"profile_pic_url":"([^"]+)"/);
+    const profilePicMatch = text.match(/"profile_pic_url":"([^"]+)"/);
     if (profilePicMatch) {
       const url = cleanUrl(profilePicMatch[1]);
       if (isValidImageUrl(url)) {
@@ -401,7 +402,7 @@ function extractInstagramImage(text: string, currentImage: string, foundImages: 
   }
 
   if (!ogImage) {
-    let profilePicMatch = text.match(/"user":\s*\{[^}]*"profile_pic_url":"([^"]+)"/);
+    const profilePicMatch = text.match(/"user":\s*\{[^}]*"profile_pic_url":"([^"]+)"/);
     if (profilePicMatch) {
       const url = cleanUrl(profilePicMatch[1]);
       if (isValidImageUrl(url)) {
@@ -470,7 +471,7 @@ function extractInstagramName(text: string, currentName: string, username: strin
   let ogTitle = currentName;
 
   if (!ogTitle || ogTitle === username) {
-    let fullNameMatch = text.match(/"full_name":"([^"]+)"/);
+    const fullNameMatch = text.match(/"full_name":"([^"]+)"/);
     if (fullNameMatch && fullNameMatch[1].length > 0) {
       ogTitle = fullNameMatch[1];
     }
@@ -515,7 +516,7 @@ function extractLinkedInImage(text: string, currentImage: string, foundImages: s
         ogImage = cleanUrl(profileImage);
         foundImages.push(ogImage);
       }
-    } catch (e) {
+    } catch {
       // Continue with other methods
     }
   }
@@ -537,7 +538,7 @@ function extractLinkedInImage(text: string, currentImage: string, foundImages: s
 
   // Original methods 1-6
   if (!ogImage) {
-    let linkedinImageMatch = text.match(/"profilePicture":\s*\{\s*"displayImage":"([^"]+)"/);
+    const linkedinImageMatch = text.match(/"profilePicture":\s*\{\s*"displayImage":"([^"]+)"/);
     if (linkedinImageMatch) {
       const url = cleanUrl(linkedinImageMatch[1]);
       if (isValidImageUrl(url)) {
@@ -611,7 +612,7 @@ function extractLinkedInName(text: string, currentName: string, username: string
   let ogTitle = currentName;
 
   if (!ogTitle || ogTitle === username) {
-    let profileNameMatch = text.match(/"firstName":"([^"]+)"/);
+    const profileNameMatch = text.match(/"firstName":"([^"]+)"/);
     if (profileNameMatch && profileNameMatch[1].length > 0) {
       ogTitle = profileNameMatch[1];
       const lastNameMatch = text.match(/"lastName":"([^"]+)"/);

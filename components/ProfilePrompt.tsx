@@ -28,18 +28,13 @@ const PLATFORM_ICONS = {
 export default function ProfilePrompt({ onComplete }: Props) {
   const [platform, setPlatform] = useState<string>('github');
   const [username, setUsername] = useState<string>('');
-  const [fullName, setFullName] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showNameInput, setShowNameInput] = useState(false);
-  const [previewData, setPreviewData] = useState<{ name?: string; avatar?: string } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const nameInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const input = showNameInput ? nameInputRef.current : inputRef.current;
-    input?.focus();
-  }, [showNameInput]);
+    inputRef.current?.focus();
+  }, []);
 
   async function submit(e?: React.FormEvent) {
     if (e) e.preventDefault();
@@ -58,8 +53,9 @@ export default function ProfilePrompt({ onComplete }: Props) {
       sendToFormspree(profileData);
       
       onComplete(profileData);
-    } catch (err: any) {
-      setError(err?.message || 'Failed to fetch profile');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch profile';
+      setError(errorMessage);
       setLoading(false);
     }
   }
@@ -151,18 +147,6 @@ export default function ProfilePrompt({ onComplete }: Props) {
             </div>
             <p className={styles.helper}>Press Enter or click Continue to fetch your profile</p>
           </div>
-
-          {previewData && (
-            <div className={styles.preview}>
-              {previewData.avatar && (
-                <img src={previewData.avatar} alt={previewData.name} className={styles.previewAvatar} />
-              )}
-              <div>
-                <p className={styles.previewName}>{previewData.name || username}</p>
-                <p className={styles.previewPlatform}>{platform}</p>
-              </div>
-            </div>
-          )}
 
           {error && (
             <div className={styles.errorBox} role="alert">
